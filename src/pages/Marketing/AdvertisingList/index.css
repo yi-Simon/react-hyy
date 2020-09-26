@@ -1,0 +1,22 @@
+.AdContainer {
+  border: 1px solid #ddd;
+  margin: 15px;
+  padding: 15px;
+}
+.AdContainer .headerSearch {
+  border: 1px solid #ddd;
+  margin: 15px;
+  padding: 15px;
+  padding-top: 30px;
+}
+.AdContainer .headerSearch .hs-btn {
+  display: flex;
+  justify-content: space-between;
+}
+.AdContainer .list-title {
+  border: 1px solid #ddd;
+  margin: 15px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+}

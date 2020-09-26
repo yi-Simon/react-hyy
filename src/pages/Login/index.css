@@ -1,0 +1,11 @@
+.login-Container {
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+}
+.login-title {
+  font-size: 35px;
+}
+.btn {
+  margin-left: 20px;
+}

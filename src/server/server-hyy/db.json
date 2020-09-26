@@ -1,0 +1,139 @@
+{
+    "addAdvertise": [{
+        "name": "123",
+        "startTime": "2020-09-01T11:42:40.301Z",
+        "endTime": "2020-09-03T11:42:41.502Z",
+        "sort": "123",
+        "link": {
+            "adlink": "baidu.com"
+        },
+        "introduction": "123",
+        "id": 2
+    }],
+    "users": [{
+            "id": 213123,
+            "password": "zasdasdas"
+        },
+        {
+            "id": 1235,
+            "password": "1111"
+        },
+        {
+            "id": 1234,
+            "password": "1234"
+        }
+    ],
+    "permissionList": [{
+            "key": "Juridiction",
+            "path": "/Marketing",
+            "component": "",
+            "name": "营销",
+            "redirect": "/Marketing/AdvertisingList",
+            "hide": false,
+            "children": [{
+                    "path": "/Marketing/AdvertisingList",
+                    "component": "AdvertisingList",
+                    "name": "广告列表",
+                    "redirect": "noredirect"
+                },
+                {
+                    "path": "/Marketing/CouponList",
+                    "component": "CouponList",
+                    "name": "优惠券",
+                    "redirect": "noredirect"
+                },
+                {
+                    "path": "/Marketing/SeckillActivityList",
+                    "component": "SeckillActivityList",
+                    "name": "秒杀活动列表",
+                    "redirect": "noredirect"
+                },
+                {
+                    "path": "/Marketing/AddAdvertise",
+                    "component": "AddAdvertise",
+                    "name": "添加广告",
+                    "redirect": "noredirect",
+                    "hide": true
+                }
+            ]
+        },
+        {
+            "key": "Marketing",
+            "path": "/Marketing",
+            "component": "",
+            "name": "商品",
+            "redirect": "/Marketing/AdvertisingList",
+            "hide": false,
+            "children": [{
+                    "name": "商品列表",
+                    "redirect": "noredirect"
+                },
+                {
+                    "name": "添加商品",
+                    "redirect": "noredirect"
+                },
+                {
+                    "name": "商品分类",
+                    "redirect": "noredirect"
+                }
+            ]
+        },
+        {
+            "key": "Order",
+            "path": "/Marketing",
+            "component": "",
+            "name": "订单",
+            "redirect": "/Marketing/AdvertisingList",
+            "hide": false,
+            "children": [{
+                    "name": "订单列表",
+                    "redirect": "noredirect"
+                },
+                {
+                    "name": "订单设置",
+                    "redirect": "noredirect"
+                },
+                {
+                    "name": "退货申请处理",
+                    "redirect": "noredirect"
+                }
+            ]
+        },
+        {
+            "key": "Shop",
+            "path": "/Marketing",
+            "component": "",
+            "name": "权限",
+            "redirect": "/Marketing/AdvertisingList",
+            "hide": false,
+            "children": [{
+                    "name": "用户列表",
+                    "redirect": "noredirect"
+                },
+                {
+                    "name": "角色列表",
+                    "redirect": "noredirect"
+                },
+                {
+                    "name": "菜单列表",
+                    "redirect": "noredirect"
+                }
+            ]
+        },
+        {
+            "key": "Add",
+            "path": "/add",
+            "hide": true
+        },
+        {
+            "key": "Delete",
+            "path": "/del",
+            "hide": true
+        },
+        {
+            "key": "Patch",
+            "path": "/patch",
+            "hide": true
+        }
+    ]
+}
