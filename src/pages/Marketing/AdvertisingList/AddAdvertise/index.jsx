@@ -27,7 +27,6 @@ class AddAdvertise extends Component {
 
   //单选框切换
   RadioChange = (e) => {
-    console.log("radio checked", e.target.value);
     this.setState({
       value: e.target.value,
     });
@@ -35,7 +34,6 @@ class AddAdvertise extends Component {
 
   //表单验证通过后，发送请求，并根据是否在路由中拿到传过来id判断是新增还是修改
   onFinish = (value) => {
-    console.log(value);
     const { endTime, introduction, link, name, sort, startTime } = value;
     const id = this.props.location.state;
     if (id) {

@@ -14,7 +14,6 @@ const tailLayout = {
 
 function Regist(props) {
   const onFinish = (values) => {
-    console.log("Success:", values);
     let { username, password, confirm } = values;
     // 校验登录信息
     if (username && password && confirm) {
@@ -31,13 +30,8 @@ function Regist(props) {
     }
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
-
   const validator = (rule, value) => {
     return new Promise((resolve, reject) => {
-      // console.log(rule, value)
       if (!value) {
         return reject("必填项");
       }
@@ -64,7 +58,6 @@ function Regist(props) {
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
       >
         <Form.Item
           label="用户名"

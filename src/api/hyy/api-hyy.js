@@ -6,15 +6,14 @@ export const reqGetSearch = () => request.get("/AdSearch");
 export const setAdvertise = (data) => Ajax.post("/addAdvertise", data);
 //修改广告
 export const modifyAdvertise = (id, data) =>
-    Ajax.patch("/addAdvertise/" + id, data);
+  Ajax.patch("/addAdvertise/" + id, data);
 //删除广告
 export const delAdvertise = (id) => Ajax.del("/addAdvertise/" + id);
 //注册用户
 export const reqRegist = (data) => {
-    console.log(data);
-    return Ajax.post("/users", data);
+  return Ajax.post("/users", data);
 };
 //获取登录验证
 export const reqLogin = (id) => Ajax.get("/users/" + id);
 //获取用户权限列表
-export const reqPermissionList = () => Ajax.get("/permissionList")
+export const reqPermissionList = () => Ajax.get("/permissionList");

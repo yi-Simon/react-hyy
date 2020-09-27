@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import "./index.less";
-import { login } from "./redux";
+import { login, isLogin } from "./redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { reqPermissionList } from "../../api/hyy/api-hyy";
 
 const layout = {
   labelCol: { span: 8 },
@@ -13,7 +14,7 @@ const tailLayout = {
   wrapperCol: { offset: 11, span: 2 },
 };
 
-@connect((state) => ({ user: state.Token }), { login })
+@connect((state) => ({ user: state.Token }), { login, isLogin })
 class Login extends Component {
   //点击登录，表单提交方法，默认介绍参数是表单的输入
   onFinish = async (values) => {
@@ -30,13 +31,19 @@ class Login extends Component {
           //使用账号信息冒充token，这里还可以给token加一个过期时间
           //添加登录状态是为了解决token在reducer返回的bug
           //将token和登录状态存到本地缓存
-          localStorage.setItem("is_Login", "true");
+          // localStorage.setItem("is_Login", true);
           localStorage.setItem(
             "user_key",
             JSON.stringify({ username, password })
           );
+          //将登录状态保存到redux，处理获取不到localStorage的bug
+          this.props.isLogin(true);
+
+          reqPermissionList().then((res) => {
+            sessionStorage.setItem("permissionList", JSON.stringify(res.data));
+            this.props.history.replace("/");
+          });
           // 登录成功跳转首页
-          this.props.history.replace("/");
         } else {
           alert("您输入的账号或密码有误");
         }
@@ -46,9 +53,6 @@ class Login extends Component {
     }
   };
 
-  onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
   render() {
     return (
       <div className="login-Container">
@@ -58,7 +62,6 @@ class Login extends Component {
           name="basic"
           initialValues={{ remember: true }}
           onFinish={this.onFinish}
-          onFinishFailed={this.onFinishFailed}
         >
           <Form.Item
             label="用户名"

@@ -17,7 +17,6 @@ class ListTable extends Component {
 
   //表格选框改变，动态存储选中的表行的id
   onSelectChange = (selectedRowKeys) => {
-    // console.log("selectedRowKeys changed: ", selectedRowKeys);
     this.setState({ selectedRowKeys });
   };
 

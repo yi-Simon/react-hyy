@@ -18,22 +18,17 @@ function Advertise(props) {
   }, []);
 
   const panelChange = (value, dataString) => {
-    console.log(dataString);
     setEndTime(dataString);
   };
   const positionChange = (value) => {
     setAdPosition(value);
-    console.log(value);
   };
   const nameChange = (e) => {
-    console.log(e.target.value);
     const { value } = e.target;
     setAdName(value);
   };
   //发送请求进行搜索，使用Form的onFinish即可
   const toSearch = () => {
-    console.log(props.getSearchList);
-    console.log(props.searchList);
     alert(`已经发送了条件为${endTime},${adPosition},${adName}的搜索`);
   };
   return (

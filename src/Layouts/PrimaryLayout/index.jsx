@@ -1,8 +1,10 @@
 import React, { Component, Suspense } from "react";
 import { Layout, Button, Popover } from "antd";
-import { Route, Link, withRouter } from "react-router-dom";
+import { Route, Link, withRouter, Switch } from "react-router-dom";
 import SideMenu from "../SideMenu";
 import components from "../../config/asyncComps";
+import { clearRedux } from "../../pages/Login/redux";
+import { connect } from "react-redux";
 
 import {
   MenuUnfoldOutlined,
@@ -11,11 +13,14 @@ import {
 } from "@ant-design/icons";
 import "./index.css";
 
+import Home from "../../pages/Home";
+
 const { Header, Sider, Content } = Layout;
 
 //获取权限列表
 const permissionList = JSON.parse(sessionStorage.getItem("permissionList"));
 
+@connect(null, { clearRedux })
 class PrimaryLayout extends Component {
   state = {
     collapsed: false,
@@ -37,7 +42,9 @@ class PrimaryLayout extends Component {
     localStorage.removeItem("user_key");
     localStorage.removeItem("is_Login");
     sessionStorage.removeItem("permissionList");
-    this.props.history.replace("/Login");
+    // 将redux的数据设置为空
+    this.props.clearRedux();
+    this.props.history.replace("/");
   };
 
   //获取私密路由
@@ -120,7 +127,10 @@ class PrimaryLayout extends Component {
               }}
             >
               <Suspense fallback={<div>正在加载...</div>}>
-                {permissionList && this.permissionRoute(permissionList)}
+                <Switch>
+                  <Route path="/" exact component={Home}></Route>
+                  {permissionList && this.permissionRoute(permissionList)}
+                </Switch>
               </Suspense>
             </Content>
           </Layout>
