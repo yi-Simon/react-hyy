@@ -1,4 +1,4 @@
 import user from "./reducer";
-import { login, isLogin, clearRedux } from "./actions";
+import { login, toLogin, clearRedux } from "./actions";
 
-export { user, login, isLogin, clearRedux };
+export { user, login, toLogin, clearRedux };

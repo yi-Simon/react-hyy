@@ -1,6 +1,6 @@
 import React, { Component, Suspense } from "react";
 import { Layout, Button, Popover } from "antd";
-import { Route, Link, withRouter, Switch } from "react-router-dom";
+import { Route, Link, withRouter, Switch, Redirect } from "react-router-dom";
 import SideMenu from "../SideMenu";
 import components from "../../config/asyncComps";
 import { clearRedux } from "../../pages/Login/redux";
@@ -18,9 +18,9 @@ import Home from "../../pages/Home";
 const { Header, Sider, Content } = Layout;
 
 //获取权限列表
-const permissionList = JSON.parse(sessionStorage.getItem("permissionList"));
+// const permissionList = JSON.parse(sessionStorage.getItem("permissionList"));
 
-@connect(null, { clearRedux })
+@connect((state) => ({ permissionList: state.user.permission }), { clearRedux })
 class PrimaryLayout extends Component {
   state = {
     collapsed: false,
@@ -39,8 +39,6 @@ class PrimaryLayout extends Component {
 
   //退出登录，清空本地缓存的用户信息和权限列表
   signOut = () => {
-    localStorage.removeItem("user_key");
-    localStorage.removeItem("is_Login");
     sessionStorage.removeItem("permissionList");
     // 将redux的数据设置为空
     this.props.clearRedux();
@@ -85,6 +83,8 @@ class PrimaryLayout extends Component {
         </p>
       </div>
     );
+
+    const permissionList = this.props.permissionList;
     return (
       <>
         <Layout className="Layout-Sider" style={{ height: "100%" }}>
@@ -130,6 +130,7 @@ class PrimaryLayout extends Component {
                 <Switch>
                   <Route path="/" exact component={Home}></Route>
                   {permissionList && this.permissionRoute(permissionList)}
+                  {/* <Redirect to="/" component={Home}></Redirect> */}
                 </Switch>
               </Suspense>
             </Content>

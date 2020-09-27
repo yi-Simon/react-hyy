@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Route, Link } from "react-router-dom";
-import { Button, Form, Input, Select, Table, DatePicker } from "antd";
+import { Link } from "react-router-dom";
+import { Button, Form, Input, Select, DatePicker } from "antd";
 import { connect } from "react-redux";
 
 import "./index.less";

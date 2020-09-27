@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Layout, Menu, Button, Popover } from "antd";
 import { Route, withRouter, Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 import { HomeOutlined, ShoppingOutlined } from "@ant-design/icons";
 
@@ -33,7 +34,7 @@ class SideMenu extends Component {
     });
   };
   render() {
-    const permissionList = JSON.parse(sessionStorage.getItem("permissionList"));
+    const permissionList = this.props.permissionList;
     return (
       <>
         <Menu
@@ -52,4 +53,6 @@ class SideMenu extends Component {
     );
   }
 }
-export default withRouter(SideMenu);
+export default withRouter(
+  connect((state) => ({ permissionList: state.user.permission }))(SideMenu)
+);

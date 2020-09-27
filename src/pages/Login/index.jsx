@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 import "./index.less";
-import { login, isLogin } from "./redux";
+import { login, toLogin } from "./redux";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { reqPermissionList } from "../../api/hyy/api-hyy";
@@ -14,7 +14,7 @@ const tailLayout = {
   wrapperCol: { offset: 11, span: 2 },
 };
 
-@connect((state) => ({ user: state.Token }), { login, isLogin })
+@connect((state) => ({ user: state.Token }), { login, toLogin })
 class Login extends Component {
   //点击登录，表单提交方法，默认介绍参数是表单的输入
   onFinish = async (values) => {
@@ -26,6 +26,7 @@ class Login extends Component {
       let res = await this.props.login(username);
       //暂时这里接收账号信息在前台校验
       if (res) {
+        console.log(res);
         if (res.password === password) {
           let { id, password } = res;
           //使用账号信息冒充token，这里还可以给token加一个过期时间
@@ -37,12 +38,14 @@ class Login extends Component {
             JSON.stringify({ username, password })
           );
           //将登录状态保存到redux，处理获取不到localStorage的bug
-          this.props.isLogin(true);
 
-          reqPermissionList().then((res) => {
-            sessionStorage.setItem("permissionList", JSON.stringify(res.data));
+          this.props.toLogin().then((res) => {
+            sessionStorage.setItem("permissionList", JSON.stringify(res));
             this.props.history.replace("/");
           });
+
+          //这里不保存isLogin状态，刷新之后恢复默认值false，登录失效
+
           // 登录成功跳转首页
         } else {
           alert("您输入的账号或密码有误");

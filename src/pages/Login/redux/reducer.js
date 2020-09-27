@@ -1,26 +1,20 @@
 import { LOGIN, LOFINFAIL } from "./constants";
 
-// const initToken = JSON.parse(localStorage.getItem("user_key")) || "";
+const permission = JSON.parse(sessionStorage.getItem("permissionList"));
 
 const initUser = {
-  token: JSON.parse(localStorage.getItem("user_key")) || "",
-  isLogin: false,
+  permission,
 };
 
 export default function user(preState = initUser, action) {
   switch (action.type) {
-    case LOGIN:
+    case "TO_LOGIN":
       return {
         ...preState,
-        token: action.data,
-      };
-    case "Is_Login":
-      return {
-        ...preState,
-        isLogin: action.data,
+        permission: action.data,
       };
     case "CLEAR_DATA":
-      return { ...preState, token: action.data, isLogin: action.data };
+      return { ...preState, permission: action.data };
     default:
       return preState;
   }

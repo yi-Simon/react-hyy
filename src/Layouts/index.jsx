@@ -4,17 +4,17 @@ import { reqPermissionList } from "../api/hyy/api-hyy";
 import PrimaryLayout from "./PrimaryLayout";
 import PublicLayout from "./PublicLayout";
 
-@connect((state) => ({ token: state.user.token, isLogin: state.user.isLogin }))
+@connect((state) => ({ permission: state.user.permission }))
 class Layouts extends Component {
   render() {
-    const { token, isLogin } = this.props;
+    const { permission } = this.props;
     // 检测token和登录状态，因为有reducer返回token的bug，所以增加一个登录状态
     //如果登录了就返回私密布局，否则返回公共布局
-    if (token && isLogin) {
+    if (permission) {
       // 获取用户的权限列表
-      reqPermissionList().then((res) => {
-        sessionStorage.setItem("permissionList", JSON.stringify(res.data));
-      });
+      // reqPermissionList().then((res) => {
+      //   sessionStorage.setItem("permissionList", JSON.stringify(res.data));
+      // });
       return (
         <>
           <PrimaryLayout></PrimaryLayout>
